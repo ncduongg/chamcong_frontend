@@ -20,8 +20,8 @@ function AdminListPage(props) {
   const getdate = (date) => {
     if (!date) return;
     const dateNew = [
-      moment(date[0]).utc(7).toISOString(),
-      moment(date[1]).utc(7).toISOString(),
+      moment(date[0]).toISOString(),
+      moment(date[1]).toISOString(),
     ];
     setUpdate(dateNew);
   };
@@ -103,7 +103,7 @@ function AdminListPage(props) {
           <div className="col-md-12 image-logo">
             <img
               src="https://dth.com.vn/img/core-img/logo.png"
-              className="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}"
+              className="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle"
               alt=""
             ></img>
           </div>

@@ -7,16 +7,16 @@ import TodoList from "../components/TodoList";
 import * as moment from 'moment'
 import "./styles.scss";
 function TodoCheckinPage(props) {
-  const dateNow = moment().utc(7).toISOString()
-  const dateOld = moment().utc(7).subtract(1,'months').toISOString()
+  const dateNow = moment().toISOString()
+  const dateOld = moment().subtract(1,'months').toISOString()
   const [checkin, setCheckin] = useState([]);
   const [update, setUpdate] = useState([dateOld, dateNow]);
   const id = useSelector((state) => state.login.user.id);
   const getdate = (date) => {
     if (!date) return;
     const dateNew = [
-      moment(date[0]).utc(7).toISOString(),
-      moment(date[1]).utc(7).toISOString()
+      moment(date[0]).toISOString(),
+      moment(date[1]).toISOString()
     ];
     setUpdate(dateNew);
   };
