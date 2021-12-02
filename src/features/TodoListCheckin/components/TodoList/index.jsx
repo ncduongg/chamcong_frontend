@@ -93,6 +93,7 @@ const TodoList = (props) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const rows = datacheckin.length > 0 ? [...datacheckin] : [];
+  console.log(rows);
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
