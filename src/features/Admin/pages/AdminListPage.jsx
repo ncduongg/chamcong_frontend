@@ -129,7 +129,7 @@ function AdminListPage(props) {
               <div className="col-md-2">
                 <ExportCSV
                   csvData={checkin}
-                  titleButton="Xuất File Nhân Viênnnnnnnn"
+                  titleButton="Xuất File Nhân Viên"
                 />
               </div>
               <div className="col-md-2">
