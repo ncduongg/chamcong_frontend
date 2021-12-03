@@ -1,14 +1,12 @@
 import React from "react";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
-import { formatDateTimeVN } from "components/from-controls/FromatDate"
-import * as moment from 'moment'
+import { formatDateTimeVN } from "components/from-controls/FromatDate";
+import * as moment from "moment";
 function TodoItem(props) {
   const { row, idx, keyindex } = props;
-  const date = moment(row.date).toString()
-  const dateEnd = moment(row.dateEnd).toString()
-  const newDate = formatDateTimeVN(date);
-  const newDateEnd = formatDateTimeVN(dateEnd);
+  const newDate = formatDateTimeVN(row.date);
+  const newDateEnd = formatDateTimeVN(row.dateEnd);
   return (
     <>
       <TableRow key={idx}>
