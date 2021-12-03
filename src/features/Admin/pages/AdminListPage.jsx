@@ -8,8 +8,8 @@ import * as moment from "moment";
 import { Button } from "@mui/material";
 import { ExportCSV } from "components/ExportExcel";
 function AdminListPage(props) {
-  const dateNow = moment().utc(7).toISOString();
-  const dateOld = moment().utc(7).subtract(1, "months").toISOString();
+  const dateNow = moment().toISOString();
+  const dateOld = moment().subtract(1, "months").toISOString();
   const [checkin, setCheckin] = useState([]);
   const [checkinAllLocal, setCheckinAllLocal] = useState([]);
   const [update, setUpdate] = useState([dateOld, dateNow]);
@@ -23,6 +23,7 @@ function AdminListPage(props) {
       moment(date[0]).toISOString(),
       moment(date[1]).toISOString(),
     ];
+    console.log(dateNew);
     setUpdate(dateNew);
   };
   // lay list van phong
