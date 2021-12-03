@@ -24,6 +24,7 @@ const Thang = {
 };
 module.exports.formatDateTimeVN = (time) => {
   const timeNew = moment(time).toString();
+  console.log(timeNew);
   const timeNewString = timeNew.split(" ");
   const objTimeNew = {
     thu: Thu[timeNewString[0]],

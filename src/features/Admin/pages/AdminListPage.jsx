@@ -19,10 +19,7 @@ function AdminListPage(props) {
   const [vanphongChange, setVanPhongChange] = useState();
   const getdate = (date) => {
     if (!date) return;
-    const dateNew = [
-      moment(date[0]).toISOString(),
-      moment(date[1]).toISOString(),
-    ];
+    const dateNew = [moment(date[0]), moment(date[1])];
     setUpdate(dateNew);
   };
   // lay list van phong
