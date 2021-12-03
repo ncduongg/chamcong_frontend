@@ -23,7 +23,6 @@ function AdminListPage(props) {
       moment(date[0]).toISOString(),
       moment(date[1]).toISOString(),
     ];
-    console.log(dateNew);
     setUpdate(dateNew);
   };
   // lay list van phong
