@@ -29,3 +29,8 @@ module.exports.dataFormat = (data) => {
   }
   return dataNew;
 };
+const dateFormatAPI = (data) => {
+  const newDate = data.split("T")[0];
+  const newTime = data.split("T")[1].slice(0, 5);
+  return newDate + " " + newTime;
+};

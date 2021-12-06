@@ -38,6 +38,6 @@ module.exports.formatDateTimeVN = (time) => {
 };
 module.exports.formatDateTimeISO = (time) => {
   // const dateStartNew = new Date(time).toISOString().split("T")[0];
-  const dateStartNew = moment(time).toISOString().split("T")[0];
+  const dateStartNew = time.split(" ")[0];
   return dateStartNew;
 };
