@@ -1,6 +1,7 @@
 import axiosClients from "./axiosClients";
 import qs from "qs";
 import axios from "axios";
+import moment from "moment";
 const apiAdmin = {
   login(data) {
     const url = "apiAdmin/loginAdmin";
@@ -8,10 +9,11 @@ const apiAdmin = {
   },
   getall(id, dateStart, dateEnd, idLocal) {
     try {
-      const dateStartNew = new Date(dateStart).toISOString().split("T")[0];
-      const newDateEndOld = new Date(dateEnd).toISOString().split("T")[0];
+      const dateStartNew = moment(dateStart).toLocaleString();
+      const newDateEndOld = moment(dateEnd).toLocaleString();
+      console.log([dateStartNew, newDateEndOld]);
       //let dateEndOld = new Date(newDateEndOld.setDate(newDateEndOld.getDate() + 1)).toISOString().split("T")[0];
-      const url = `/api/filter?id=${id}&dateStart=${dateStartNew}T00:00:01.000Z&dateEnd=${newDateEndOld}T23:59:00.000Z&idLocal=${idLocal}`;
+      const url = `/api/filter?id=${id}&dateStart=${dateStartNew}&dateEnd=${newDateEndOld}&idLocal=${idLocal}`;
       return axiosClients.get(url);
     } catch (error) {
       return error;

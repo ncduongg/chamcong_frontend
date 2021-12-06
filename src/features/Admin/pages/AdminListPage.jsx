@@ -7,8 +7,8 @@ import TodoList from "features/TodoListCheckin/components/TodoList";
 import * as moment from "moment";
 import React, { useEffect, useState } from "react";
 function AdminListPage(props) {
-  const dateNow = moment().toISOString();
-  const dateOld = moment().subtract(1, "months").toISOString();
+  const dateNow = moment().toLocaleString();
+  const dateOld = moment().subtract(1, "months").toLocaleString();
   const [checkin, setCheckin] = useState([]);
   const [checkinAllLocal, setCheckinAllLocal] = useState([]);
   const [update, setUpdate] = useState([dateOld, dateNow]);
@@ -18,10 +18,7 @@ function AdminListPage(props) {
   const [vanphongChange, setVanPhongChange] = useState();
   const getdate = (date) => {
     if (!date) return;
-    const dateNew = [
-      moment(date[0]).toISOString(),
-      moment(date[1]).toISOString(),
-    ];
+    const dateNew = [moment(date[0]), moment(date[1])];
     setUpdate(dateNew);
   };
   // lay list van phong
@@ -93,8 +90,6 @@ function AdminListPage(props) {
       }
     })();
   }, [vanphongChange]);
-  // Xuat file
-  const handleClickExportFileAll = () => {};
   return (
     <div>
       <div className="container-fuild">
