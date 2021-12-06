@@ -9,9 +9,8 @@ const apiAdmin = {
   },
   getall(id, dateStart, dateEnd, idLocal) {
     try {
-      const dateStartNew = moment(dateStart).toLocaleString();
-      const newDateEndOld = moment(dateEnd).toLocaleString();
-      console.log([dateStartNew, newDateEndOld]);
+      const dateStartNew = moment(dateStart).toJSON();
+      const newDateEndOld = moment(dateEnd).toJSON();
       //let dateEndOld = new Date(newDateEndOld.setDate(newDateEndOld.getDate() + 1)).toISOString().split("T")[0];
       const url = `/api/filter?id=${id}&dateStart=${dateStartNew}&dateEnd=${newDateEndOld}&idLocal=${idLocal}`;
       return axiosClients.get(url);
