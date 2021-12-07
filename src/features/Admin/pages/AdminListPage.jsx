@@ -3,6 +3,7 @@ import { ExportCSV } from "components/ExportExcel";
 import { dataFormat } from "components/from-controls/FromatData/FromatData";
 import SelectDate from "components/SelectDate";
 import SelectOption from "components/SelectOption";
+import { set } from "date-fns";
 import TodoList from "features/TodoListCheckin/components/TodoList";
 import * as moment from "moment";
 import React, { useEffect, useState } from "react";
@@ -44,7 +45,10 @@ function AdminListPage(props) {
             update[1],
             vanphongChange
           );
-          if (res.data["err"] === "Id nhân viên không đúng") return;
+          if (res.data["err"] === "Id nhân viên không đúng") {
+            setCheckin([]);
+            return;
+          }
           setCheckin(dataFormat(res.data));
         }
         if (typeof updateNv === "undefined") {
@@ -78,7 +82,7 @@ function AdminListPage(props) {
       if (typeof vanphongChange != "undefined") {
         const res = await apiAdmin.getIDandUser(vanphongChange);
         if (res.data.user.length > 0) {
-          setUpdateNV();
+          setNhanvien([]);
           setNhanvien(res.data.user);
         }
         if (res.data.user.length === 0) {
