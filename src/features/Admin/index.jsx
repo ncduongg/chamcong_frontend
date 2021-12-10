@@ -3,6 +3,7 @@ import { Route, Switch, useRouteMatch } from "react-router-dom";
 import AdminCheckinPage from "./pages/AdminListPage";
 import AdminPage from "./pages/AdminPage";
 import AdminUploadFile from "./pages/AdminUploadFile";
+import AdminQuanLyNhanVien from "./pages/AdminQuanLyNhanVien";
 
 function AdminFeature(props) {
   const match = useRouteMatch();
@@ -18,6 +19,11 @@ function AdminFeature(props) {
         <Route
           path={`${match.path}/Upload`}
           component={AdminUploadFile}
+          exact
+        />
+        <Route
+          path={`${match.path}/ListNhanVien`}
+          component={AdminQuanLyNhanVien}
           exact
         />
       </Switch>

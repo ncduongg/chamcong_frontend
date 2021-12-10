@@ -32,6 +32,9 @@ const HeaderAdmin = () => {
   const handleCheckin = () => {
     history.push(`${match.path}/Checkin`);
   };
+  const handleListNhanVien = () => {
+    history.push(`${match.path}/ListNhanVien`);
+  };
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -67,6 +70,9 @@ const HeaderAdmin = () => {
               </Button>
               <Button color="inherit" onClick={handleCheckin}>
                 Quản Lý
+              </Button>
+              <Button color="inherit" onClick={handleListNhanVien}>
+                Danh Sách Nhân Viên
               </Button>
               <IconButton
                 size="large"

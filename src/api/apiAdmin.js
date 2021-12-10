@@ -27,19 +27,23 @@ const apiAdmin = {
       return error;
     }
   },
-  uploadFile(file) {
+  uploadFile(file, status) {
     try {
       const url = "apiAdmin/uploadfile";
       const formData = new FormData();
       formData.append("file", file);
+      formData.append("status", status);
       return axiosClients.post(url, formData);
     } catch (error) {
       return error;
     }
   },
-  getListFile() {
+  getListFile(status) {
+    const data = {
+      status,
+    };
     const url = "apiAdmin/getListFile";
-    return axiosClients.get(url);
+    return axiosClients.post(url, data);
   },
   readFile(params) {
     const url = "apiAdmin/readfileNOsql";
@@ -55,6 +59,11 @@ const apiAdmin = {
     console.log(params);
     return axiosClients.post(url, params);
   },
+  writeFileNhanVien(params) {
+    const url = "apiAdmin/writeFileNhanVienToCSDL";
+    console.log(params);
+    return axiosClients.post(url, params);
+  },
   getListVanPhong() {
     const url = "apiAdmin/getListVP";
     return axiosClients.get(url);
@@ -62,6 +71,23 @@ const apiAdmin = {
   addListVanPhong(data) {
     const url = "apiAdmin/addListVP";
     return axiosClients.post(url, data);
+  },
+  readFileNhanVien(params) {
+    const url = "apiAdmin/readfilenhanvien";
+    return axiosClients.get(url, {
+      params: params,
+      paramsSerializer: (params) => {
+        return qs.stringify(params);
+      },
+    });
+  },
+  getlistNhanVien(idLocal) {
+    const url = "apiAdmin/getlistNhanVienbyIdlocal";
+    return axiosClients.post(url, idLocal);
+  },
+  updateNhanVien(nv) {
+    const url = "apiAdmin/UpdateNhanVien";
+    return axiosClients.post(url, nv);
   },
 };
 export default apiAdmin;
