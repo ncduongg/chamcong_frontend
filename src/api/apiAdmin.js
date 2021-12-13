@@ -11,7 +11,6 @@ const apiAdmin = {
     try {
       const dateStartNew = moment(dateStart).toJSON();
       const newDateEndOld = moment(dateEnd).toJSON();
-      //let dateEndOld = new Date(newDateEndOld.setDate(newDateEndOld.getDate() + 1)).toISOString().split("T")[0];
       const url = `/api/filter?id=${id}&dateStart=${dateStartNew}&dateEnd=${newDateEndOld}&idLocal=${idLocal}`;
       return axiosClients.get(url);
     } catch (error) {

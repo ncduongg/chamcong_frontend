@@ -7,9 +7,18 @@ import { set } from "date-fns";
 import TodoList from "features/TodoListCheckin/components/TodoList";
 import * as moment from "moment";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useHistory, useRouteMatch } from "react-router";
 function AdminListPage(props) {
-  const dateNow = moment().toLocaleString();
-  const dateOld = moment().subtract(1, "months").toLocaleString();
+  const history = useHistory();
+  const headerCheckLoginAdmin = useSelector((state) => state.loginadmin.admin);
+  const isLogin = !!headerCheckLoginAdmin.username;
+  if (!isLogin) history.push(`/Admin`);
+  const dateNow = moment().startOf("day").toLocaleString();
+  const dateOld = moment()
+    .startOf("day")
+    .subtract(1, "months")
+    .toLocaleString();
   const [checkin, setCheckin] = useState([]);
   const [checkinAllLocal, setCheckinAllLocal] = useState([]);
   const [update, setUpdate] = useState([dateOld, dateNow]);

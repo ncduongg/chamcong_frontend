@@ -6,6 +6,8 @@ import React, { useEffect, useState } from "react";
 import ListDataGrid from "../components/ListDataGrid";
 import _ from "lodash";
 import { useSnackbar } from "notistack";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router";
 const columnsListNhanVien = [
   // { field: "id", headerName: "ID", width: 100 },
   {
@@ -21,6 +23,10 @@ const columnsListNhanVien = [
   },
 ];
 const AdminQuanLyNhanVien = (props) => {
+  const history = useHistory();
+  const headerCheckLoginAdmin = useSelector((state) => state.loginadmin.admin);
+  const isLogin = !!headerCheckLoginAdmin.username;
+  if (!isLogin) history.push(`/Admin`);
   const { enqueueSnackbar } = useSnackbar();
   //state List Nhan Vien
   const [listNV, setListNV] = useState([]);

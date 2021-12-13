@@ -2,6 +2,8 @@ import { Button, TextField } from "@mui/material";
 import apiAdmin from "api/apiAdmin";
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router";
 import ListDataGrid from "../components/ListDataGrid";
 const columnsListVanPhong = [
   { field: "id", headerName: "ID", width: 100 },
@@ -27,6 +29,10 @@ const columnsListVanPhong = [
   },
 ];
 const AdminVanPhong = (props) => {
+  const history = useHistory();
+  const headerCheckLoginAdmin = useSelector((state) => state.loginadmin.admin);
+  const isLogin = !!headerCheckLoginAdmin.username;
+  if (!isLogin) history.push(`/Admin`);
   const { enqueueSnackbar } = useSnackbar();
   const [vanphong, setVanPhong] = useState([]);
   const [vanphongInput, setVanPhongInput] = useState({

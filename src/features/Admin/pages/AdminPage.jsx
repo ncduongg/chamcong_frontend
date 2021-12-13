@@ -2,7 +2,7 @@ import { unwrapResult } from "@reduxjs/toolkit";
 import LoginForm from "features/Login/components/LoginForm";
 import React from "react";
 import { useSnackbar } from "notistack";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginAdmin } from "redux/reducers/loginAdminSlice";
 import { useRouteMatch, useHistory } from "react-router-dom";
 const AdminPage = (props) => {
@@ -10,6 +10,9 @@ const AdminPage = (props) => {
   const { enqueueSnackbar } = useSnackbar();
   const match = useRouteMatch();
   const history = useHistory();
+  const headerCheckLoginAdmin = useSelector((state) => state.loginadmin.admin);
+  const isLogin = !!headerCheckLoginAdmin.username;
+  if (isLogin) history.push(`${match.path}/Checkin`);
   const handleClickLoginAdmin = async (val) => {
     try {
       const action = loginAdmin(val);

@@ -14,6 +14,8 @@ import { dataFormat } from "components/from-controls/FromatData/FromatData";
 import TodoList from "features/TodoListCheckin/components/TodoList";
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router";
 import TodoListNV from "../../TodoListCheckin/components/TodoListNV";
 import ListDataGrid from "../components/ListDataGrid";
 import "./styles.scss";
@@ -64,6 +66,12 @@ const columnsListVanPhong = [
   },
 ];
 function AdminUploadFile(props) {
+  //verry login
+  const history = useHistory();
+  const headerCheckLoginAdmin = useSelector((state) => state.loginadmin.admin);
+  const isLogin = !!headerCheckLoginAdmin.username;
+  if (!isLogin) history.push(`/Admin`);
+  //end
   const { enqueueSnackbar } = useSnackbar();
   const [file, setFile] = useState("Chọn File...");
   const [dataListFile, setDataListFile] = useState([]);

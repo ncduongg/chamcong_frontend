@@ -1,11 +1,10 @@
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import vi from "date-fns/locale/vi";
 import DateRangePicker from "@mui/lab/DateRangePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { TextField } from "@mui/material";
 import { Box } from "@mui/system";
+import vi from "date-fns/locale/vi";
 import React from "react";
-import * as moment from "moment";
 function SelectDate(props) {
   const { getdate, date } = props;
   return (
