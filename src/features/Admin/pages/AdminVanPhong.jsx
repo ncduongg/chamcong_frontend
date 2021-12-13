@@ -27,6 +27,7 @@ const columnsListVanPhong = [
   },
 ];
 const AdminVanPhong = (props) => {
+  const { enqueueSnackbar } = useSnackbar();
   const [vanphong, setVanPhong] = useState([]);
   const [vanphongInput, setVanPhongInput] = useState({
     nameVP: "",
@@ -55,43 +56,40 @@ const AdminVanPhong = (props) => {
           return newTableData;
         })
         .then((newTableData) => {
-          // setTimeout(() => {
-          //   setVanPhong(newTableData);
-          // }, 0);
           setVanPhong(newTableData);
         });
     })();
   }, [refestListVanPhong]);
-  // const handleClickAddVanPhong = async () => {
-  //   if (vanphongInput.nameVP === "" || vanphongInput.deviceID === "") {
-  //     enqueueSnackbar(
-  //       "Vui lòng nhập Đủ và Đúng Tên văn phòng + Mã máy chấm công",
-  //       {
-  //         variant: "error",
-  //       }
-  //     );
-  //     return;
-  //   }
-  //   const res = await apiAdmin.addListVanPhong(vanphongInput);
-  //   if (res.data.status) {
-  //     enqueueSnackbar(res.data.message, {
-  //       variant: "success",
-  //     });
-  //     setRefestVanPhong(!refestListVanPhong);
-  //     setVanPhongInput({
-  //       nameVP: "",
-  //       deviceID: "",
-  //       status: "Bình thường",
-  //     });
-  //     return;
-  //   }
-  //   if (!res.data.status) {
-  //     enqueueSnackbar(res.data.message, {
-  //       variant: "error",
-  //     });
-  //     return;
-  //   }
-  // };
+  const handleClickAddVanPhong = async () => {
+    if (vanphongInput.nameVP === "" || vanphongInput.deviceID === "") {
+      enqueueSnackbar(
+        "Vui lòng nhập Đủ và Đúng Tên văn phòng + Mã máy chấm công",
+        {
+          variant: "error",
+        }
+      );
+      return;
+    }
+    const res = await apiAdmin.addListVanPhong(vanphongInput);
+    if (res.data.status) {
+      enqueueSnackbar(res.data.message, {
+        variant: "success",
+      });
+      setRefestVanPhong(!refestListVanPhong);
+      setVanPhongInput({
+        nameVP: "",
+        deviceID: "",
+        status: "Bình thường",
+      });
+      return;
+    }
+    if (!res.data.status) {
+      enqueueSnackbar(res.data.message, {
+        variant: "error",
+      });
+      return;
+    }
+  };
   return (
     <div>
       <div className="container-fuild">
@@ -144,7 +142,7 @@ const AdminVanPhong = (props) => {
                   <Button
                     variant="contained"
                     color="success"
-                    // onClick={handleClickAddVanPhong}
+                    onClick={handleClickAddVanPhong}
                   >
                     Thêm văn phòng
                   </Button>
