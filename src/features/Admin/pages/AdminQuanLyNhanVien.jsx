@@ -1,6 +1,7 @@
 import apiAdmin from "api/apiAdmin";
 import SelectOption from "components/SelectOption";
 import EditItem from "features/TodoListCheckin/components/EditItem";
+import AddItem from "features/TodoListCheckin/components/AddItem";
 import React, { useEffect, useState } from "react";
 import ListDataGrid from "../components/ListDataGrid";
 import _ from "lodash";
@@ -60,6 +61,37 @@ const AdminQuanLyNhanVien = (props) => {
       variant: "error",
     });
   };
+  // func get ma cham cong, ten nhan vien tu input
+  const handleClickAddNhanVien = async (name, idCC) => {
+    if (name === " " || name === "" || idCC === "" || idCC === " ") {
+      enqueueSnackbar("Vui lòng nhập đúng", {
+        variant: "error",
+      });
+      return;
+    }
+    if (vanphongChange.length === 0) {
+      enqueueSnackbar("Vui lòng chọn văn phòng", {
+        variant: "error",
+      });
+      return;
+    }
+    try {
+      const nv = {
+        name: name,
+        idCC: idCC,
+        idvanphong: vanphongChange,
+      };
+      const res = await apiAdmin.addNhanVien(nv);
+      enqueueSnackbar(res.data.message, {
+        variant: res.data.status ? "success" : "error",
+      });
+    } catch (error) {
+      enqueueSnackbar(`Error :  ${error}`, {
+        variant: "error",
+      });
+      return;
+    }
+  };
   // get List Van Phong
   useEffect(() => {
     (async () => {
@@ -111,13 +143,15 @@ const AdminQuanLyNhanVien = (props) => {
                   />
                 </div>
                 <div className="col-md-12">
-                  {arrayNvSelected.map((val) => (
-                    <EditItem
-                      key={val.id}
-                      onSubmitChange={handleUpdateNhanVien}
-                      value={val}
-                    />
-                  ))}
+                  {arrayNvSelected &&
+                    arrayNvSelected.map((val) => (
+                      <EditItem
+                        key={val.id}
+                        onSubmitChange={handleUpdateNhanVien}
+                        value={val}
+                      />
+                    ))}
+                  <AddItem onClickAddNhanVien={handleClickAddNhanVien} />
                 </div>
               </div>
             </div>

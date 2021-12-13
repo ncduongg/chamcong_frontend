@@ -89,5 +89,9 @@ const apiAdmin = {
     const url = "apiAdmin/UpdateNhanVien";
     return axiosClients.post(url, nv);
   },
+  addNhanVien(nv) {
+    const url = "apiAdmin/AddNhanVien";
+    return axiosClients.post(url, nv);
+  },
 };
 export default apiAdmin;

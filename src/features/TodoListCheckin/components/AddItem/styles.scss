@@ -1,0 +1,18 @@
+.Edit-item{
+    margin: 10px 0px;
+    border: solid 1px gray;
+    border-radius: 5px;
+    background-attachment: fixed;
+    padding-bottom: 25px;
+    .Edit-item_button{
+        padding:12px 50px;
+        font-size: 14px;
+    }
+    .Edit-item_container{
+        padding-top: 20px;
+    }
+    input{
+        width: 100% !important;
+        height: 100% !important;
+    }
+}

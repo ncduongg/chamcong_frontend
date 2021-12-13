@@ -12,7 +12,7 @@ const ListDataGrid = (props) => {
           rows={dataFile}
           columns={columns}
           checkboxSelection
-          editRowsModel="false"
+          disableColumnSelector
           onSelectionModelChange={handleChangeFile}
           rowsPerPageOptions={[10, 25, 50, 100]}
         />
