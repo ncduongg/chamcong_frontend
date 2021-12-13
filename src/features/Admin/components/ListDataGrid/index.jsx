@@ -1,6 +1,7 @@
-import { DataGrid } from "@material-ui/data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import React from "react";
-const ListDataGrid = ({ dataFile, onHandleFile, columns }) => {
+const ListDataGrid = (props) => {
+  const { dataFile, onHandleFile, columns } = props;
   const handleChangeFile = (id) => {
     onHandleFile(id);
   };
@@ -11,6 +12,7 @@ const ListDataGrid = ({ dataFile, onHandleFile, columns }) => {
           rows={dataFile}
           columns={columns}
           checkboxSelection
+          editRowsModel="false"
           onSelectionModelChange={handleChangeFile}
           rowsPerPageOptions={[10, 25, 50, 100]}
         />

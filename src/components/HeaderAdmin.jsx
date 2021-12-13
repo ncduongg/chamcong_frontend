@@ -35,6 +35,9 @@ const HeaderAdmin = () => {
   const handleListNhanVien = () => {
     history.push(`${match.path}/ListNhanVien`);
   };
+  const handleListVanPhong = () => {
+    history.push(`${match.path}/ListVanPhong`);
+  };
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -73,6 +76,9 @@ const HeaderAdmin = () => {
               </Button>
               <Button color="inherit" onClick={handleListNhanVien}>
                 Danh Sách Nhân Viên
+              </Button>
+              <Button color="inherit" onClick={handleListVanPhong}>
+                Danh Sách Văn Phòng
               </Button>
               <IconButton
                 size="large"

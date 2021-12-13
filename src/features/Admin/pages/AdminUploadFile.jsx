@@ -3,7 +3,6 @@ import {
   Button,
   FormControl,
   FormControlLabel,
-  IconButton,
   Radio,
   RadioGroup,
   TextField,
@@ -15,10 +14,9 @@ import { dataFormat } from "components/from-controls/FromatData/FromatData";
 import TodoList from "features/TodoListCheckin/components/TodoList";
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
-import ListDataGrid from "../components/ListDataGrid";
 import TodoListNV from "../../TodoListCheckin/components/TodoListNV";
+import ListDataGrid from "../components/ListDataGrid";
 import "./styles.scss";
-import { GridMenuIcon } from "@material-ui/data-grid";
 const columnsListFile = [
   { field: "id", headerName: "ID", width: 100 },
   {
@@ -46,13 +44,20 @@ const columnsListVanPhong = [
   { field: "id", headerName: "ID", width: 100 },
   {
     field: "nameVP",
-    headerName: "Tên File",
+    headerName: "Tên văn phòng",
+    width: 250,
+    editable: true,
+  },
+  {
+    field: "deviceID",
+    headerName: "Mã máy chấm công",
+    type: "number",
     width: 250,
     editable: true,
   },
   {
     field: "status",
-    headerName: "Ngày",
+    headerName: "Trạng Thái",
     type: "number",
     width: 250,
     editable: true,
@@ -69,10 +74,7 @@ function AdminUploadFile(props) {
   const [readFileNhanVien, setReadFileNhanVien] = useState([]);
   const [vanphong, setVanPhong] = useState([]);
   const [vanphongCheck, setVanPhongCheck] = useState([]);
-  const [vanphongInput, setVanPhongInput] = useState({});
-  const [vanphongInputText, setVanPhongInputText] = useState();
   const [refestListFile, setRefestListFile] = useState(false);
-  const [refestListVanPhong, setRefestVanPhong] = useState(false);
   const [valueFile, setValueFile] = useState(0);
   const [dataTodoListNhanVien, setDataTodoListNhanVien] = useState([]);
   const uploadFile = async (e) => {
@@ -211,49 +213,40 @@ function AdminUploadFile(props) {
   //   }
   // };
   //Button them van phong
-  const handleClickAddVanPhong = async () => {
-    if (Object.entries(vanphongInput).length === 0) {
-      enqueueSnackbar("Vui lòng nhập tên văn phòng", {
-        variant: "error",
-      });
-      return;
-    }
-    const res = await apiAdmin.addListVanPhong(vanphongInput);
-    if (res.data.status) {
-      enqueueSnackbar(res.data.message, {
-        variant: "success",
-      });
-      setRefestVanPhong(refestListVanPhong ? false : true);
-      setVanPhongInput({});
-      setVanPhongInputText("");
-      return;
-    }
-    if (!res.data.status) {
-      enqueueSnackbar(res.data.message, {
-        variant: "error",
-      });
-      return;
-    }
-  };
+  // const handleClickAddVanPhong = async () => {
+  //   console.log(vanphongInput);
+  //   if (vanphongInput.nameVP === "" || vanphongInput.deviceID === "") {
+  //     enqueueSnackbar(
+  //       "Vui lòng nhập Đủ và Đúng Tên văn phòng + Mã máy chấm công",
+  //       {
+  //         variant: "error",
+  //       }
+  //     );
+  //     return;
+  //   }
+  //   const res = await apiAdmin.addListVanPhong(vanphongInput);
+  //   if (res.data.status) {
+  //     enqueueSnackbar(res.data.message, {
+  //       variant: "success",
+  //     });
+  //     setRefestVanPhong(!refestListVanPhong);
+  //     setVanPhongInput({});
+  //     // setVanPhongInputText("");
+  //     return;
+  //   }
+  //   if (!res.data.status) {
+  //     enqueueSnackbar(res.data.message, {
+  //       variant: "error",
+  //     });
+  //     return;
+  //   }
+  // };
 
   // Lay list Van Phong
   const handleCheckVanPhong = (id) => {
     setVanPhongCheck(id);
   };
-  useEffect(() => {
-    (async () => {
-      const res = await apiAdmin.getListVanPhong();
-      const rawData = res.data.data;
-      let newTableData = rawData.map((x) => {
-        const newX = {
-          id: x._id,
-          ...x,
-        };
-        return newX;
-      });
-      setVanPhong(newTableData);
-    })();
-  }, [refestListVanPhong]);
+
   //Doc file
   const handleReadFile = (id) => {
     setReadFile(id);
@@ -287,9 +280,7 @@ function AdminUploadFile(props) {
         return newX;
       });
       // neu de du lieu tinh thi hien du lieu API luc hien luc khon
-      setTimeout(() => {
-        setDataListFile(newTableData);
-      }, 10);
+      setDataListFile(newTableData);
     })();
     (async () => {
       const res = await apiAdmin.getListFile(1);
@@ -302,11 +293,27 @@ function AdminUploadFile(props) {
         return newX;
       });
       // neu de du lieu tinh thi hien du lieu API luc hien luc khon
-      setTimeout(() => {
-        setDataListFileNhanVien(newTableData);
-      }, 10);
+      setDataListFileNhanVien(newTableData);
+      // setTimeout(() => {
+      //   setDataListFileNhanVien(newTableData);
+      // }, 10);
     })();
   }, [refestListFile]);
+  // Lay list vp
+  useEffect(() => {
+    (async () => {
+      const res = await apiAdmin.getListVanPhong();
+      const rawData = res.data.data;
+      let newTableData = rawData.map((x) => {
+        const newX = {
+          id: x._id,
+          ...x,
+        };
+        return newX;
+      });
+      setVanPhong(newTableData);
+    })();
+  }, []);
   // cho loai file
   const handleChangeFile = (e) => {
     setValueFile(e.target.value);
@@ -456,40 +463,19 @@ function AdminUploadFile(props) {
               <AppBar position="static">
                 <Toolbar variant="dense">
                   <Typography variant="h6" color="inherit" component="div">
-                    Văn Phòng
+                    Văn Phòng - Máy chấm công
                   </Typography>
                 </Toolbar>
               </AppBar>
-              <div className="col-md-8">
-                <ListDataGrid
-                  dataFile={vanphong}
-                  onHandleFile={handleCheckVanPhong}
-                  columns={columnsListVanPhong}
-                />
-              </div>
-              <div className="col-md-4">
-                <div className="col-md-12">
-                  <TextField
-                    id="outlined-basic"
-                    onKeyUp={(e) =>
-                      setVanPhongInput({
-                        nameVP: e.target.value,
-                        status: "Bình thường",
-                      })
-                    }
-                    label="Văn Phòng"
-                    variant="outlined"
-                    className="input_vanPhong"
-                  />
-                </div>
-                <div className="col-md-12">
-                  <Button
-                    onClick={handleClickAddVanPhong}
-                    variant="contained"
-                    component="label"
-                  >
-                    Thêm Văn Phòng
-                  </Button>
+              <div className="col-md-12">
+                <div className="container-fluid">
+                  <div className="row">
+                    <ListDataGrid
+                      dataFile={vanphong}
+                      onHandleFile={handleCheckVanPhong}
+                      columns={columnsListVanPhong}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -501,71 +487,3 @@ function AdminUploadFile(props) {
 }
 
 export default AdminUploadFile;
-{
-  /* <div className="col-md-8">
-                <div className="container-fluid">
-                  <div className="col-md-12">
-                    <TodoList datacheckin={dataTodoList} />
-                  </div>
-                  <div className="col-md-12">
-                    <TodoListNV listnv={dataTodoList} />
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-4">
-                <div className="container">
-                  <div className="row">
-                    <div className="col-md-9">
-                      <ListDataGrid
-                        dataFile={dataListFile}
-                        onHandleFile={handleReadFile}
-                        columns={columnsListFile}
-                      />
-                      <TextField
-                        id="outlined-basic"
-                        onKeyUp={(e) =>
-                          setVanPhongInput({
-                            nameVP: e.target.value,
-                            status: "Bình thường",
-                          })
-                        }
-                        label="Văn Phòng"
-                        variant="outlined"
-                        className="input_vanPhong"
-                      />
-                      <Button
-                        onClick={handleClickAddVanPhong}
-                        variant="contained"
-                        component="label"
-                        className="btn-vanphong"
-                      >
-                        Thêm Văn Phòng
-                      </Button>
-                      <ListDataGrid
-                        dataFile={vanphong}
-                        onHandleFile={handleCheckVanPhong}
-                        columns={columnsListVanPhong}
-                      />
-                    </div>
-                    <div className="col-md-3">
-                      <Button
-                        onClick={handleGhiFile}
-                        variant="contained"
-                        component="label"
-                        className="btn-file"
-                      >
-                        Ghi File SQL
-                      </Button>
-                      <Button
-                        onClick={handleUploadFile}
-                        variant="outlined"
-                        component="label"
-                        className="btn-file"
-                      >
-                        Xóa File
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </div> */
-}
