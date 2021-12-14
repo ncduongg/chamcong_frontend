@@ -1,14 +1,16 @@
 import apiAdmin from "api/apiAdmin";
 import { ExportCSV } from "components/ExportExcel";
-import { dataFormat } from "components/from-controls/FromatData/FromatData";
+import {
+  dataFormat,
+  dataFormatEx,
+} from "components/from-controls/FromatData/FromatData";
 import SelectDate from "components/SelectDate";
 import SelectOption from "components/SelectOption";
-import { set } from "date-fns";
 import TodoList from "features/TodoListCheckin/components/TodoList";
 import * as moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useHistory, useRouteMatch } from "react-router";
+import { useHistory } from "react-router";
 function AdminListPage(props) {
   const history = useHistory();
   const headerCheckLoginAdmin = useSelector((state) => state.loginadmin.admin);
@@ -62,7 +64,7 @@ function AdminListPage(props) {
         }
         if (typeof updateNv === "undefined") {
           setCheckin([]);
-          setCheckinAllLocal([]);
+          // setCheckinAllLocal([]);
         }
       }
     })();
@@ -78,7 +80,8 @@ function AdminListPage(props) {
           vanphongChange
         );
         if (res.data["err"] === "Id nhân viên không đúng") return;
-        setCheckinAllLocal(dataFormat(res.data));
+        console.log(dataFormatEx(res.data));
+        await setCheckinAllLocal(dataFormat(res.data));
       }
     })();
   }, [vanphongChange, update]);
