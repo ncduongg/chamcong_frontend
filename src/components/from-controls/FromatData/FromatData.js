@@ -31,7 +31,6 @@ module.exports.dataFormat = (data) => {
 };
 module.exports.dataFormatEx = (data) => {
   const doneArray = [];
-  console.log(data);
   for (let i = 0; i < data.length; i++) {
     let newArrayItemByID = [];
     for (let k = i; k < data.length; k++) {

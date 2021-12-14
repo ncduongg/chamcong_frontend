@@ -80,7 +80,7 @@ function AdminListPage(props) {
           vanphongChange
         );
         if (res.data["err"] === "Id nhân viên không đúng") return;
-        console.log(dataFormatEx(res.data));
+        // console.log(dataFormatEx(res.data));
         await setCheckinAllLocal(dataFormat(res.data));
       }
     })();
