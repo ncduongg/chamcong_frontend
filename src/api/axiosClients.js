@@ -1,6 +1,6 @@
 import axios from "axios";
 const axiosClients = axios.create({
-  baseURL: "http://localhost:3001",
+  baseURL: "http://128.199.144.198:3001",
 });
 // Add a request interceptor
 axios.interceptors.request.use(
