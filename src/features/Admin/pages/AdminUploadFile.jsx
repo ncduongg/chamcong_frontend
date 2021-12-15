@@ -390,7 +390,7 @@ function AdminUploadFile(props) {
                 </Toolbar>
               </AppBar>
               <div className="col-md-8">
-                <TodoList datacheckin={dataTodoList} />
+                <TodoList datacheckin={dataTodoList} dataHistory={[]} />
               </div>
               <div className="col-md-4">
                 <div className="col-md-12">
