@@ -91,6 +91,7 @@ const AdminQuanLyNhanVien = (props) => {
       enqueueSnackbar(res.data.message, {
         variant: res.data.status ? "success" : "error",
       });
+      setRefreshListNV(!refreshListNV);
     } catch (error) {
       enqueueSnackbar(`Error :  ${error}`, {
         variant: "error",
