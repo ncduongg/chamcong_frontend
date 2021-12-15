@@ -89,7 +89,7 @@ const apiAdmin = {
     return axiosClients.post(url, nv);
   },
   addNhanVien(nv) {
-    const url = "apiAdmin/AddNhanVien";
+    const url = "apiAdmin/Add_RemoveNhanVien";
     return axiosClients.post(url, nv);
   },
 };

@@ -19,7 +19,6 @@ function TodoItem(props) {
   const [open, setOpen] = React.useState(false);
   const newDate = formatDateTimeVN(row.date);
   const newDateEnd = formatDateTimeVN(row.dateEnd);
-  console.log(rowHistory);
   return (
     <>
       <TableRow key={idx}>
