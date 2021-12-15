@@ -29,25 +29,15 @@ module.exports.dataFormat = (data) => {
   }
   return dataNew;
 };
-module.exports.dataFormatEx = (data) => {
-  const doneArray = [];
-  for (let i = 0; i < data.length; i++) {
-    let newArrayItemByID = [];
-    for (let k = i; k < data.length; k++) {
-      if (data[i].idUser === data[k].idUser) {
-        newArrayItemByID.push(data[k]);
-      }
-      if (data[i].idUser !== data[k].idUser) {
-        i = k - 1;
-        doneArray.push(newArrayItemByID);
-        break;
-      }
+module.exports.dataFormatHisory = (data, dataHistory) => {
+  const newHistory = dataHistory.filter((item) => {
+    if (splitDate(data.date) === splitDate(item.date)) {
+      return item;
     }
-  }
-  return doneArray;
+  });
+  console.log(newHistory);
+  return newHistory;
 };
-const dateFormatAPI = (data) => {
-  const newDate = data.split("T")[0];
-  const newTime = data.split("T")[1].slice(0, 5);
-  return newDate + " " + newTime;
+const splitDate = (date) => {
+  return date.split(" ")[0];
 };

@@ -22,6 +22,7 @@ function AdminListPage(props) {
     .subtract(1, "months")
     .toLocaleString();
   const [checkin, setCheckin] = useState([]);
+  const [checkinHistory, setCheckinHistory] = useState([]);
   const [checkinAllLocal, setCheckinAllLocal] = useState([]);
   const [update, setUpdate] = useState([dateOld, dateNow]);
   const [updateNv, setUpdateNV] = useState();
@@ -60,6 +61,7 @@ function AdminListPage(props) {
             setCheckin([]);
             return;
           }
+          setCheckinHistory(res.data);
           setCheckin(dataFormat(res.data));
         }
         if (typeof updateNv === "undefined") {
@@ -152,7 +154,12 @@ function AdminListPage(props) {
             </div>
           </div>
           <div className="col-md-12">
-            <TodoList datacheckin={checkin} getdate={getdate} date={update} />
+            <TodoList
+              datacheckin={checkin}
+              dataHistory={checkinHistory}
+              getdate={getdate}
+              date={update}
+            />
           </div>
         </div>
       </div>

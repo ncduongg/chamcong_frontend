@@ -14,6 +14,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableFooter from "@mui/material/TableFooter";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
+import { dataFormatHisory } from "components/from-controls/FromatData/FromatData";
 import "date-fns";
 import PropTypes from "prop-types";
 import * as React from "react";
@@ -89,7 +90,7 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 const TodoList = (props) => {
-  const { datacheckin } = props;
+  const { datacheckin, dataHistory } = props;
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const rows = datacheckin.length > 0 ? [...datacheckin] : [];
@@ -133,6 +134,7 @@ const TodoList = (props) => {
                 : rows
               ).map((row, idx) => (
                 <TodoItem
+                  rowHistory={dataFormatHisory(row, dataHistory)}
                   row={row}
                   idx={row}
                   keyindex={rows.indexOf(row)}
