@@ -116,6 +116,7 @@ const TodoList = (props) => {
           >
             <TableHead>
               <TableRow>
+                <TableCell align="left">XXXXX</TableCell>
                 <TableCell align="left">STT</TableCell>
                 <TableCell align="left">Tên</TableCell>
                 <TableCell align="left">Checkin</TableCell>
