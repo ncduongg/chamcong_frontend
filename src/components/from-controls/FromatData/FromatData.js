@@ -35,7 +35,6 @@ module.exports.dataFormatHisory = (data, dataHistory) => {
       return item;
     }
   });
-  console.log(newHistory);
   return newHistory;
 };
 const splitDate = (date) => {
