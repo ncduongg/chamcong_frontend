@@ -123,18 +123,18 @@ const AdminQuanLyNhanVien = (props) => {
   }, [vanphongChange, refreshListNV]);
   return (
     <div>
-      <div className="container-fuild">
+      <div className="container-fuild xxx">
         <div className="row">
-          <div className="col-md-12 image-logo">
+          <div className="container-fluid image-logo">
             <img
               src="https://dth.com.vn/img/core-img/logo.png"
               className="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle"
               alt=""
             ></img>
           </div>
-          <div className="container-fluid">
+          <div className="container-fluid tableShow">
             <div className="row">
-              <div className="col-md-7">
+              <div className="col-md-7 ">
                 <ListDataGrid
                   dataFile={listNV}
                   onHandleFile={handleChangeArraySelected}

@@ -110,7 +110,7 @@ function AdminListPage(props) {
   }, [vanphongChange]);
   return (
     <div>
-      <div className="container-fuild">
+      <div className="container-fuild xxx">
         <div className="row">
           <div className="col-md-12 image-logo">
             <img

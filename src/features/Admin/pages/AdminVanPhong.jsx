@@ -98,7 +98,7 @@ const AdminVanPhong = (props) => {
   };
   return (
     <div>
-      <div className="container-fuild">
+      <div className="container-fuild xxx">
         <div className="row">
           <div className="col-md-12 image-logo">
             <img
@@ -107,7 +107,7 @@ const AdminVanPhong = (props) => {
               alt=""
             ></img>
           </div>
-          <div className="container-fluid">
+          <div className="container-fluid tableShow">
             <div className="row">
               <div className="col-md-7">
                 <ListDataGrid
